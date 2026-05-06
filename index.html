@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartReturn | AI Return Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Pinned ORT version for WASM stability on GitHub Pages -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.17.3/dist/ort.min.js"></script>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <div class="container">
+        <header>
+            <div class="badge">AI-Powered</div>
+            <h1>Return Risk<br><span>Predictor</span></h1>
+            <p>Fill in the order details below to instantly assess the likelihood of a product return.</p>
+        </header>
+
+        <div class="card">
+            <div class="form-group">
+                <label>Product Category</label>
+                <select id="category">
+                    <option value="0">📚 Books</option>
+                    <option value="1" selected>👗 Clothing</option>
+                    <option value="2">💻 Electronics</option>
+                    <option value="3">🏠 Home Appliances</option>
+                    <option value="4">🧸 Toys</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Price (USD)</label>
+                    <div class="input-wrap">
+                        <span class="prefix">$</span>
+                        <input type="number" id="price" value="45.00" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" id="qty" value="1" min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Shipping Method</label>
+                <select id="shipping">
+                    <option value="0">⚡ Express</option>
+                    <option value="1">🚀 Next-Day</option>
+                    <option value="2" selected>📦 Standard</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Customer Age</label>
+                    <input type="number" id="age" value="30" min="16" max="100">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select id="gender">
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" id="discount" value="0.0">
+            <input type="hidden" id="payment" value="1">
+
+            <button id="predict-btn">
+                <span class="btn-text">Analyze Return Risk</span>
+                <span class="btn-loader hidden"></span>
+            </button>
+        </div>
+
+        <div id="result-container" class="hidden">
+            <div class="result-inner">
+                <div id="result-icon" class="result-icon"></div>
+                <div>
+                    <div id="result-label" class="result-label"></div>
+                    <div id="result-text" class="result-text"></div>
+                </div>
+            </div>
+            <div id="confidence-bar-wrap" class="confidence-wrap hidden">
+                <div class="confidence-label">
+                    <span>Return Probability</span>
+                    <span id="confidence-pct">—</span>
+                </div>
+                <div class="confidence-track">
+                    <div id="confidence-bar" class="confidence-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>Model runs 100% locally · No data leaves your browser</footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
