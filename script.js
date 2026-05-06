@@ -3,6 +3,8 @@
 // which fails on GitHub Pages due to CORS/MIME. We override the path to load
 // from the same CDN URL so the browser fetches them correctly.
 ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.17.3/dist/';
+ort.env.wasm.numThreads = 1;
+ort.env.wasm.simd = false;
 
 // ─── Config ────────────────────────────────────────────────────────────────────
 const MODEL_PATH = './model.onnx';
